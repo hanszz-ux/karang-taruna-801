@@ -237,40 +237,106 @@
 
         @if($galeris->count())
 
-            <div class="galeri-grid">
+            <div
+                class="galeri-sortable-grid"
+                id="galeriSortable"
+            >
 
                 @foreach($galeris as $galeri)
 
-                    <div class="galeri-item">
+                    <div
+                        class="galeri-sortable-item"
+                        data-id="{{ $galeri->id }}"
+                    >
 
-                        <div class="galeri-image">
+                        {{-- DRAG HANDLE --}}
+
+                        <div class="galeri-drag-handle">
+                            <i class="fa-solid fa-grip-vertical"></i>
+                        </div>
+
+
+                        {{-- COVER BADGE --}}
+
+                        @if($galeri->is_cover)
+
+                            <div class="galeri-cover-badge">
+                                <i class="fa-solid fa-star"></i>
+                                COVER
+                            </div>
+
+                        @endif
+
+
+                        {{-- FOTO --}}
+
+                        <div class="galeri-sortable-image">
 
                             <img
                                 src="{{ asset('storage/' . $galeri->image) }}"
-                                alt="{{ $galeri->title ?? 'Galeri Karang Taruna' }}"
+                                alt="{{ $galeri->title ?: 'Galeri Karang Taruna' }}"
                             >
 
                         </div>
 
 
-                        <div class="galeri-info">
+                        {{-- INFO --}}
 
-                            <h4>
-                                {{ $galeri->title ?: 'Tanpa Judul' }}
-                            </h4>
+                        <div class="galeri-sortable-info">
 
-                            @if($galeri->category)
+                            <div>
 
-                                <span class="galeri-category">
-                                    {{ $galeri->category }}
-                                </span>
+                                <h4>
+                                    {{ $galeri->title ?: 'Tanpa Judul' }}
+                                </h4>
 
-                            @endif
+                                @if($galeri->category)
+
+                                    <span>
+                                        {{ $galeri->category }}
+                                    </span>
+
+                                @endif
+
+                            </div>
 
                         </div>
 
 
-                        <div class="galeri-actions">
+                        {{-- ACTION --}}
+
+                        <div class="galeri-sortable-actions">
+
+                            @unless($galeri->is_cover)
+
+                                <form
+                                    action="{{ route('admin.galeri.cover', $galeri) }}"
+                                    method="POST"
+                                >
+
+                                    @csrf
+
+                                    <button
+                                        type="submit"
+                                        class="galeri-cover-button"
+                                        title="Jadikan Cover"
+                                    >
+                                        <i class="fa-regular fa-star"></i>
+                                    </button>
+
+                                </form>
+
+                            @else
+
+                                <span
+                                    class="galeri-cover-active"
+                                    title="Foto Cover"
+                                >
+                                    <i class="fa-solid fa-star"></i>
+                                </span>
+
+                            @endunless
+
 
                             <form
                                 action="{{ route('admin.galeri.destroy', $galeri) }}"
@@ -279,6 +345,7 @@
                             >
 
                                 @csrf
+
                                 @method('DELETE')
 
                                 <button
@@ -298,6 +365,34 @@
                 @endforeach
 
             </div>
+
+
+            {{-- SAVE ORDER --}}
+
+            <div class="galeri-sort-footer">
+
+                <div class="galeri-sort-hint">
+
+                    <i class="fa-solid fa-up-down-left-right"></i>
+
+                    <span>
+                        Drag foto untuk mengatur urutan.
+                    </span>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    id="saveGalleryOrder"
+                    class="galeri-save-order"
+                >
+                    <i class="fa-solid fa-floppy-disk"></i>
+                    Simpan Urutan
+                </button>
+
+            </div>
+
 
         @else
 

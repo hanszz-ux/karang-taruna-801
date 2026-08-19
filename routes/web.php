@@ -76,6 +76,12 @@ Route::middleware(['auth'])
         Route::delete('/galeri/{galeri}', [GaleriController::class, 'destroy'])
             ->name('galeri.destroy');
 
+        Route::post('/galeri/reorder', [GaleriController::class, 'reorder'])
+            ->name('galeri.reorder');
+
+        Route::post('/galeri/{galeri}/cover', [GaleriController::class, 'setCover'])
+            ->name('galeri.cover');
+
     });
 
 require __DIR__.'/auth.php';

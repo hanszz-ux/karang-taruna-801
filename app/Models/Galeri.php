@@ -11,5 +11,11 @@ class Galeri extends Model
         'image',
         'category',
         'description',
+        'sort_order',
+        'is_cover',
+    ];
+
+    protected $casts = [
+        'is_cover' => 'boolean',
     ];
 }
