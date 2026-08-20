@@ -4629,220 +4629,164 @@ a {
 }
 
 /* =========================================================
-   FINAL HERO LOGO FIX
-   KARANG TARUNA 801
-   Desktop : kanan
-   Mobile  : tengah bawah seperti style BEM UI
-   ========================================================= */
-
-/* ---------------------------------------------------------
-   DESKTOP
-   --------------------------------------------------------- */
-
-.hero-logo-decoration {
-    position: absolute !important;
-
-    top: 50% !important;
-    right: 4% !important;
-    left: auto !important;
-    bottom: auto !important;
-
-    width: min(42vw, 600px) !important;
-    max-width: 600px !important;
-
-    height: auto !important;
-
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-
-    transform: translateY(-50%) !important;
-
-    z-index: 5 !important;
-
-    pointer-events: none !important;
-}
-
-.hero-logo-decoration img {
-    display: block !important;
-
-    width: 100% !important;
-    height: auto !important;
-
-    max-width: 100% !important;
-    max-height: 72vh !important;
-
-    object-fit: contain !important;
-
-    margin: 0 !important;
-
-    opacity: 1 !important;
-
-    filter:
-        drop-shadow(0 25px 40px rgba(0,0,0,.55))
-        drop-shadow(0 0 30px rgba(212,175,55,.10)) !important;
-}
-
-
-/* ---------------------------------------------------------
-   TABLET
-   --------------------------------------------------------- */
-
-@media (max-width: 1024px) and (min-width: 751px) {
-
-    .hero-logo-decoration {
-        top: 50% !important;
-        right: 2% !important;
-        left: auto !important;
-        bottom: auto !important;
-
-        width: min(45vw, 500px) !important;
-
-        transform: translateY(-50%) !important;
-    }
-
-    .hero-logo-decoration img {
-        max-height: 65vh !important;
-    }
-}
-
-
-/* =========================================================
-   MOBILE
-   Logo dibuat seperti konsep BEM UI:
-   besar, centered, berada di bagian bawah hero,
-   tidak menabrak heading.
+   FINAL MOBILE HERO LOGO
+   STYLE: BEM UI / DECORATIVE WATERMARK
    ========================================================= */
 
 @media (max-width: 750px) {
 
-    /* Hero tetap mengikuti konten */
+    /* =====================================================
+       HERO
+       ===================================================== */
+
     .hero-section {
         position: relative !important;
         overflow: hidden !important;
     }
 
-    /* Container logo */
+
+    /* =====================================================
+       TEXT HARUS SELALU DI DEPAN
+       ===================================================== */
+
+    .hero-section > .landing-container,
+    .hero-content,
+    .hero-text {
+        position: relative !important;
+        z-index: 30 !important;
+    }
+
+
+    /* =====================================================
+       LOGO KARANG TARUNA
+       Jangan lagi pakai bottom negatif.
+       Kita posisikan berdasarkan TOP.
+       ===================================================== */
+
     .hero-logo-decoration {
         position: absolute !important;
 
-        top: auto !important;
+        /* MATIKAN SEMUA POSISI LAMA */
+        top: 58% !important;
+        bottom: auto !important;
+
         left: 50% !important;
         right: auto !important;
 
         /*
-         * Dorong logo ke bagian bawah.
-         * Ini yang mencegah logo menabrak judul.
+         * Ukuran lebih kecil supaya tidak masuk
+         * ke area judul.
          */
-        bottom: -115px !important;
+        width: 250px !important;
+        height: 250px !important;
 
-        width: min(78vw, 340px) !important;
-        max-width: 340px !important;
+        max-width: none !important;
 
-        height: auto !important;
-
-        transform: translateX(-50%) !important;
+        transform: translate(-50%, -50%) !important;
 
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
 
         /*
-         * Di bawah text tapi tetap terlihat.
+         * Di bawah text.
          */
         z-index: 5 !important;
 
         pointer-events: none !important;
+
+        opacity: .18 !important;
     }
+
+
+    /* =====================================================
+       GAMBAR LOGO
+       ===================================================== */
 
     .hero-logo-decoration img {
         position: relative !important;
 
-        width: 100% !important;
-        height: auto !important;
+        display: block !important;
 
-        max-width: 100% !important;
-        max-height: 42vh !important;
+        width: 100% !important;
+        height: 100% !important;
+
+        max-width: none !important;
+        max-height: none !important;
 
         object-fit: contain !important;
 
+        margin: 0 !important;
         transform: none !important;
 
-        /*
-         * Sedikit transparan seperti logo dekoratif
-         * pada referensi BEM UI.
-         */
-        opacity: .92 !important;
+        opacity: 1 !important;
 
         filter:
-            drop-shadow(0 18px 30px rgba(0,0,0,.50))
-            drop-shadow(0 0 25px rgba(212,175,55,.08)) !important;
+            drop-shadow(0 18px 30px rgba(0,0,0,.45)) !important;
     }
 
-    /*
-     * Text harus selalu berada di depan logo.
-     */
-    .hero-section > .landing-container,
-    .hero-content {
-        position: relative !important;
-        z-index: 20 !important;
-    }
 
-    .hero-text {
-        position: relative !important;
-        z-index: 20 !important;
-    }
+    /* =====================================================
+       BACKGROUND HERO
+       Jangan sampai background ikut mengacaukan logo.
+       ===================================================== */
 
-    /*
-     * Overlay berada di atas background,
-     * tetapi di bawah text dan logo.
-     */
-    .hero-overlay {
-        z-index: 4 !important;
-        pointer-events: none !important;
-    }
-
-    /*
-     * Background image database tetap dekoratif.
-     * Jangan sampai menutupi logo utama.
-     */
     .hero-background {
         position: absolute !important;
+
         inset: 0 !important;
-        z-index: 3 !important;
+
+        z-index: 1 !important;
+
         pointer-events: none !important;
     }
+
 
     .hero-background img {
         position: absolute !important;
 
         left: 50% !important;
         right: auto !important;
-        top: auto !important;
 
-        bottom: -80px !important;
+        top: 55% !important;
+        bottom: auto !important;
 
-        width: min(75vw, 320px) !important;
-        max-height: 38vh !important;
+        width: 280px !important;
 
-        transform: translateX(-50%) !important;
+        max-width: none !important;
+        max-height: 280px !important;
+
+        transform: translate(-50%, -50%) !important;
 
         object-fit: contain !important;
 
-        /*
-         * Hero image dari database hanya sebagai
-         * background dekoratif.
-         */
-        opacity: .10 !important;
+        opacity: .06 !important;
     }
 
-    /*
-     * Statistik harus berada di atas bagian logo
-     * jika sedikit overlap.
-     */
+
+    /* =====================================================
+       OVERLAY
+       ===================================================== */
+
+    .hero-overlay {
+        position: absolute !important;
+
+        inset: 0 !important;
+
+        z-index: 4 !important;
+
+        pointer-events: none !important;
+    }
+
+
+    /* =====================================================
+       STATS
+       ===================================================== */
+
     .stats-section {
         position: relative !important;
-        z-index: 30 !important;
+
+        z-index: 50 !important;
     }
 }
 
@@ -4854,22 +4798,17 @@ a {
 @media (max-width: 480px) {
 
     .hero-logo-decoration {
-        bottom: -105px !important;
+        top: 60% !important;
 
-        width: min(80vw, 320px) !important;
-        max-width: 320px !important;
-    }
+        width: 225px !important;
+        height: 225px !important;
 
-    .hero-logo-decoration img {
-        max-height: 39vh !important;
-        opacity: .90 !important;
+        opacity: .16 !important;
     }
 
     .hero-background img {
-        width: min(72vw, 290px) !important;
-        max-height: 34vh !important;
-
-        bottom: -70px !important;
+        width: 250px !important;
+        max-height: 250px !important;
     }
 }
 
@@ -4881,13 +4820,10 @@ a {
 @media (max-width: 360px) {
 
     .hero-logo-decoration {
-        bottom: -90px !important;
+        top: 61% !important;
 
-        width: 78vw !important;
-        max-width: 290px !important;
+        width: 205px !important;
+        height: 205px !important;
     }
 
-    .hero-logo-decoration img {
-        max-height: 36vh !important;
-    }
 }
