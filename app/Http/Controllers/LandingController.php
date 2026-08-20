@@ -30,7 +30,8 @@ class LandingController extends Controller
             ->take(3)
             ->get();
 
-        $galeris = Galeri::orderByDesc('is_cover')
+        $galeris = Galeri::orderBy('category')
+            ->orderByDesc('is_cover')
             ->orderBy('sort_order')
             ->orderBy('id')
             ->get();

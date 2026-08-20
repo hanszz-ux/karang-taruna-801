@@ -109,7 +109,6 @@ class GaleriController extends Controller
             );
     }
 
-
     /**
      * Menyimpan urutan foto.
      */
@@ -141,10 +140,9 @@ class GaleriController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Urutan galeri berhasil disimpan.',
+            'message' => 'Urutan album berhasil disimpan.',
         ]);
     }
-
 
     /**
      * Menjadikan foto sebagai cover.
@@ -153,11 +151,14 @@ class GaleriController extends Controller
     {
         DB::transaction(function () use ($galeri) {
 
-            Galeri::where('is_cover', true)
+            // Matikan cover HANYA pada album/category yang sama
+            Galeri::where('category', $galeri->category)
+                ->where('id', '!=', $galeri->id)
                 ->update([
                     'is_cover' => false,
                 ]);
 
+            // Jadikan foto yang dipilih sebagai cover album
             $galeri->update([
                 'is_cover' => true,
             ]);
@@ -167,10 +168,9 @@ class GaleriController extends Controller
             ->route('admin.galeri.index')
             ->with(
                 'success',
-                'Foto berhasil dijadikan cover galeri.'
+                'Foto berhasil dijadikan cover album.'
             );
     }
-
 
     /**
      * Menghapus foto.

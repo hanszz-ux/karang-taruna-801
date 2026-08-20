@@ -133,38 +133,6 @@
 
             </div>
 
-
-            <div class="form-group full">
-
-                <label>
-                    Foto Hero
-                </label>
-
-                <input
-                    type="file"
-                    name="hero_image"
-                    accept="image/jpeg,image/png,image/webp"
-                >
-
-                <small>
-                    JPG, PNG atau WEBP. Maksimal 2 MB.
-                </small>
-
-                @if($setting->hero_image)
-
-                    <div class="image-preview">
-
-                        <img
-                            src="{{ asset('storage/' . $setting->hero_image) }}"
-                            alt="Hero"
-                        >
-
-                    </div>
-
-                @endif
-
-            </div>
-
         </div>
 
     </div>
