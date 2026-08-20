@@ -64,10 +64,10 @@
             type="button"
             class="mobile-menu-button"
             id="mobileMenuButton"
+            aria-label="Buka menu"
+            aria-expanded="false"
         >
-
-            <i class="fa-solid fa-bars"></i>
-
+            <span></span>
         </button>
 
     </div>
@@ -1212,11 +1212,24 @@
     });
 
 
-    if (mobileButton) {
+    if (mobileButton && mobileNav) {
 
         mobileButton.addEventListener('click', function () {
 
-            mobileNav.classList.toggle('show');
+            const isOpen =
+                mobileButton.classList.toggle('active');
+
+            mobileNav.classList.toggle('active');
+
+            mobileButton.setAttribute(
+                'aria-expanded',
+                isOpen ? 'true' : 'false'
+            );
+
+            mobileButton.setAttribute(
+                'aria-label',
+                isOpen ? 'Tutup menu' : 'Buka menu'
+            );
 
         });
 
@@ -1226,13 +1239,25 @@
     document.querySelectorAll('.mobile-nav a')
         .forEach(function (link) {
 
-            link.addEventListener('click', function () {
+        link.addEventListener('click', function () {
 
-                mobileNav.classList.remove('show');
+            mobileNav.classList.remove('active');
 
-            });
+            mobileButton.classList.remove('active');
+
+            mobileButton.setAttribute(
+                'aria-expanded',
+                'false'
+            );
+
+            mobileButton.setAttribute(
+                'aria-label',
+                'Buka menu'
+            );
 
         });
+
+    });
 
     /* =========================================================
         SCROLL REVEAL
@@ -1830,11 +1855,6 @@
 
                 }
 
-
-                /*
-                | ESC
-                */
-
                 if (
                     event.key === 'Escape'
                 ) {
@@ -1843,11 +1863,6 @@
 
                 }
 
-
-                /*
-                | ARROW RIGHT
-                */
-
                 if (
                     event.key === 'ArrowRight'
                 ) {
@@ -1855,11 +1870,6 @@
                     galleryNext();
 
                 }
-
-
-                /*
-                | ARROW LEFT
-                */
 
                 if (
                     event.key === 'ArrowLeft'

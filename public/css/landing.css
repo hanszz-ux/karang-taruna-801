@@ -4827,3 +4827,253 @@ a {
     }
 
 }
+
+/* =========================================================
+   PREMIUM MOBILE MENU
+   HAMBURGER → X
+   ========================================================= */
+
+.mobile-menu-button {
+    position: relative;
+
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    border: 1px solid rgba(212, 175, 55, 0.45);
+    border-radius: 12px;
+
+    background: rgba(10, 12, 9, 0.78);
+
+    color: #d8b94b;
+
+    cursor: pointer;
+
+    transition:
+        background 0.4s ease,
+        border-color 0.4s ease,
+        box-shadow 0.4s ease,
+        transform 0.4s cubic-bezier(.22, 1, .36, 1);
+}
+
+
+/* Buat 3 garis */
+
+.mobile-menu-button::before,
+.mobile-menu-button::after,
+.mobile-menu-button span {
+    content: "";
+
+    position: absolute;
+
+    width: 20px;
+    height: 2px;
+
+    border-radius: 999px;
+
+    background: #d8b94b;
+
+    transform-origin: center;
+
+    transition:
+        transform 0.45s cubic-bezier(.68, -0.55, .265, 1.55),
+        top 0.35s ease,
+        bottom 0.35s ease,
+        opacity 0.25s ease,
+        width 0.35s ease;
+}
+
+
+/* Garis atas */
+
+.mobile-menu-button::before {
+    top: 16px;
+}
+
+
+/* Garis tengah */
+
+.mobile-menu-button span {
+    top: 23px;
+}
+
+
+/* Garis bawah */
+
+.mobile-menu-button::after {
+    bottom: 16px;
+}
+
+
+/* =========================================================
+   HOVER
+   ========================================================= */
+
+.mobile-menu-button:hover {
+    background: rgba(212, 175, 55, 0.08);
+
+    border-color: rgba(212, 175, 55, 0.8);
+
+    box-shadow:
+        0 0 0 4px rgba(212, 175, 55, 0.05),
+        0 12px 30px rgba(0, 0, 0, 0.25);
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   ACTIVE
+   3 GARIS → X
+   ========================================================= */
+
+.mobile-menu-button.active::before {
+    top: 23px;
+
+    transform: rotate(45deg);
+}
+
+.mobile-menu-button.active span {
+    opacity: 0;
+
+    transform: scaleX(0);
+}
+
+.mobile-menu-button.active::after {
+    bottom: 23px;
+
+    transform: rotate(-45deg);
+}
+
+
+/* =========================================================
+   ACTIVE BUTTON
+   ========================================================= */
+
+.mobile-menu-button.active {
+    background: rgba(212, 175, 55, 0.10);
+
+    border-color: rgba(212, 175, 55, 0.8);
+
+    box-shadow:
+        0 0 0 4px rgba(212, 175, 55, 0.05),
+        0 12px 30px rgba(0, 0, 0, 0.25);
+}
+
+
+/* =========================================================
+   MOBILE NAVIGATION
+   BUKA / TUTUP SMOOTH
+   ========================================================= */
+
+.mobile-nav {
+    opacity: 0;
+
+    visibility: hidden;
+
+    transform:
+        translateY(-18px)
+        scaleY(0.96);
+
+    transform-origin: top;
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.35s ease,
+        transform 0.45s cubic-bezier(.22, 1, .36, 1),
+        visibility 0.35s ease;
+}
+
+
+/* MENU TERBUKA */
+
+.mobile-nav.active {
+    opacity: 1;
+
+    visibility: visible;
+
+    transform:
+        translateY(0)
+        scaleY(1);
+
+    pointer-events: auto;
+}
+
+
+/* =========================================================
+   LINK MENU
+   ========================================================= */
+
+.mobile-nav a {
+    opacity: 0;
+
+    transform: translateY(-8px);
+
+    transition:
+        opacity 0.3s ease,
+        transform 0.4s cubic-bezier(.22, 1, .36, 1);
+}
+
+
+/* Saat menu aktif */
+
+.mobile-nav.active a {
+    opacity: 1;
+
+    transform: translateY(0);
+}
+
+
+/* Delay setiap menu */
+
+.mobile-nav.active a:nth-child(1) {
+    transition-delay: .04s;
+}
+
+.mobile-nav.active a:nth-child(2) {
+    transition-delay: .08s;
+}
+
+.mobile-nav.active a:nth-child(3) {
+    transition-delay: .12s;
+}
+
+.mobile-nav.active a:nth-child(4) {
+    transition-delay: .16s;
+}
+
+.mobile-nav.active a:nth-child(5) {
+    transition-delay: .20s;
+}
+
+.mobile-nav.active a:nth-child(6) {
+    transition-delay: .24s;
+}
+
+.mobile-nav.active a:nth-child(7) {
+    transition-delay: .28s;
+
+}
+
+
+/* =========================================================
+   REDUCE MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .mobile-menu-button,
+    .mobile-menu-button::before,
+    .mobile-menu-button::after,
+    .mobile-menu-button span,
+    .mobile-nav,
+    .mobile-nav a {
+        transition: none !important;
+    }
+}
