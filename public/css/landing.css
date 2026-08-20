@@ -5077,3 +5077,130 @@ a {
         transition: none !important;
     }
 }
+
+/* =========================================================
+   MOBILE NAV - FIX OPEN / CLOSE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .mobile-nav {
+        display: flex !important;
+        flex-direction: column;
+
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+
+        width: 100%;
+
+        padding: 14px 24px 20px;
+
+        background: rgba(5, 7, 5, 0.97);
+
+        border-top: 1px solid rgba(212, 175, 55, 0.15);
+        border-bottom: 1px solid rgba(212, 175, 55, 0.12);
+
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+
+        opacity: 0;
+        visibility: hidden;
+
+        pointer-events: none;
+
+        transform: translateY(-15px);
+
+        transition:
+            opacity 0.35s ease,
+            transform 0.4s cubic-bezier(.22, 1, .36, 1),
+            visibility 0.35s ease;
+    }
+
+
+    /* MENU TERBUKA */
+
+    .mobile-nav.active {
+        opacity: 1;
+
+        visibility: visible;
+
+        pointer-events: auto;
+
+        transform: translateY(0);
+    }
+
+
+    /* LINK */
+
+    .mobile-nav a {
+        display: block;
+
+        width: 100%;
+
+        padding: 13px 4px;
+
+        color: #eee8d5;
+
+        text-decoration: none;
+
+        font-size: 14px;
+        font-weight: 500;
+
+        opacity: 0;
+        transform: translateY(-8px);
+
+        transition:
+            opacity 0.3s ease,
+            transform 0.4s cubic-bezier(.22, 1, .36, 1),
+            color 0.25s ease;
+    }
+
+
+    /* LINK MUNCUL */
+
+    .mobile-nav.active a {
+        opacity: 1;
+
+        transform: translateY(0);
+    }
+
+
+    /* DELAY */
+
+    .mobile-nav.active a:nth-child(1) {
+        transition-delay: .04s;
+    }
+
+    .mobile-nav.active a:nth-child(2) {
+        transition-delay: .08s;
+    }
+
+    .mobile-nav.active a:nth-child(3) {
+        transition-delay: .12s;
+    }
+
+    .mobile-nav.active a:nth-child(4) {
+        transition-delay: .16s;
+    }
+
+    .mobile-nav.active a:nth-child(5) {
+        transition-delay: .20s;
+    }
+
+    .mobile-nav.active a:nth-child(6) {
+        transition-delay: .24s;
+    }
+
+    .mobile-nav.active a:nth-child(7) {
+        transition-delay: .28s;
+    }
+
+
+    /* HOVER */
+
+    .mobile-nav a:hover {
+        color: #d8b94b;
+    }
+}
